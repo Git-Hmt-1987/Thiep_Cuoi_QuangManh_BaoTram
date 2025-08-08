@@ -6,11 +6,13 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Expires" content="-1">
-    <meta name="keywords" content="Thiệp cưới online, website đám cưới, thiệp cưới điện tử, thiệp cưới, đám cưới, happyweddingday">
-    <meta name="description" content="Sử dụng Full các tính năng nâng cao, các tính năng đặc biệt của thiệp và sử dụng trọn đời.">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+    :root { --vh: 1vh; }
+    html, body { height: 100%; }
     * {
         margin: 0;
         padding: 0;
@@ -19,64 +21,68 @@
     body {
         background: #fff;
     }
+/* cloud doors */
 .cloud-door {
-    position: fixed;
-    top: 0;
-    width: 50vw;
-    height: 100vh;
-    transition: transform 4s ease-in-out;
-    z-index: 9999;
-    background-size: 200% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    
-}
-.left-door {
-    left: 0;
-    transform: translateX(0);
-    background-image: url('img/door.jpg');
-    background-size: 200% 100%; /* Phóng to để mỗi cửa chiếm 1 nửa */
-    background-position: left center;
+  position: fixed;
+  top: 0;
+  width: 50vw;           /* mỗi cửa chiếm nửa viewport */
+  max-width: 50%;        /* bảo đảm không vượt */
+  height: calc(var(--vh, 1vh) * 100); /* thay cho 100vh */
+  transition: transform 4s ease-in-out;
+  z-index: 9999;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 200% auto; /* duy trì split-image nhưng scale height tự nhiên */
 }
 
-.right-door {
-    right: 0;
-    transform: translateX(0);
-    background-image: url('img/door.jpg');
-    background-size: 200% 100%;
-    background-position: right center;
+/* mỗi nửa lấy nửa ảnh */
+.left-door  { left: 0;  background-position: left center; }
+.right-door { right: 0; background-position: right center; }
+
+.open .left-door  { transform: translateX(-100%); }
+.open .right-door { transform: translateX(100%); }
+
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 50vh;
+  opacity: 0;
+  transition: opacity 2s ease-in-out 4s;
 }
-    .open .left-door {
-        transform: translateX(-100%);
-    }
-    .open .right-door {
-        transform: translateX(100%);
-    }
-    .content {
-        position: relative;
-        z-index: 10;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        padding-top: 50vh;
-        opacity: 0;
-        transition: opacity 2s ease-in-out 4s;
-    }
-    .open .content {
-        opacity: 1;
-    }
+.open .content { opacity: 1; }
 @media (min-width: 768px) {
     .left-door {
-        background-image: url('https://w.ladicdn.com/5c728619c417ab07e5194baa/z6587626478947_d7b503e4ce70ca497f8f07a3a196b6dd-20250510080856-_acyw.jpg');
+        background-image: url('/img/door.jpg');
+      
     }
     .right-door {
-        background-image: url('https://w.ladicdn.com/5c728619c417ab07e5194baa/z6587626478947_d7b503e4ce70ca497f8f07a3a196b6dd-20250510080856-_acyw.jpg');
+        background-image: url('/img/door.jpg');
+        
     }
+}
+@media (max-width: 767px) {
+  .left-door, .right-door {
+    background-image: url('img/door.jpg');
+    background-size: cover;
+    background-position: center;
+  }
 }
 </style>
 
-<meta id="viewport" name="viewport" content="width=420,user-scalable=no,initial-scale=3.2523809523809524,minimum-scale=3.2523809523809524,maximum-scale=3.2523809523809524">
+<!-- <meta id="viewport" name="viewport" content="width=420,user-scalable=no,initial-scale=3.2523809523809524,minimum-scale=3.2523809523809524,maximum-scale=3.2523809523809524"> -->
 </head>
+<script>
+  (function setVh(){
+    const update = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    update();
+    window.addEventListener('resize', update);
+  })();
+</script>
 <!-- Làm xong thì bỏ open đi -->
 <body class=""> 
 <div class="cloud-door left-door"></div>
