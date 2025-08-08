@@ -66,8 +66,16 @@ body {
 @media (max-width: 767px) {
   .left-door, .right-door {
     background-image: url('img/door.jpg');
-    background-size: 200%;
+    background-size: 100% auto; /* Không phóng gấp đôi, giữ nguyên tỉ lệ chiều cao */
     background-position: center;
+    background-repeat: no-repeat;
+  }
+  /* Giữ nguyên chia đôi ảnh */
+  .left-door {
+    background-position: left center;
+  }
+  .right-door {
+    background-position: right center;
   }
 }
 </style>
