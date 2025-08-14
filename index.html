@@ -96,9 +96,9 @@ body {
 <div class="cloud-door left-door"></div>
 <div class="cloud-door right-door"></div>
 <script>
-    window.onload = function() {
-        setTimeout(() => document.body.classList.add('open'), 100);
-    };
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('open');
+});
 </script>
 <script type="text/javascript">
     window.ladi_viewport = function(b) {
